@@ -9,23 +9,25 @@
 
 | 路徑 | 內容 |
 |---|---|
-| `site/` | 整個網站，直接把這個資料夾上傳到主機即可 |
-| `site/index.html` | 首頁 |
-| `site/about/index.html` | 對應舊網址 `/about`（其他頁面同理，共 87 頁，含部落格分類頁） |
-| `site/uploads/` | 後台上傳的圖片 |
-| `site/assets/` | 版型用的 CSS、JS、字型、圖示 |
-| `site/sitemap.xml`、`site/robots.txt` | 搜尋引擎用的網站地圖與規則（照舊站保留） |
+| `docs/` | 整個網站，直接把這個資料夾上傳到主機即可 |
+| `docs/index.html` | 首頁 |
+| `docs/about/index.html` | 對應舊網址 `/about`（其他頁面同理，共 87 頁，含部落格分類頁） |
+| `docs/uploads/` | 後台上傳的圖片 |
+| `docs/assets/` | 版型用的 CSS、JS、字型、圖示 |
+| `docs/sitemap.xml`、`docs/robots.txt` | 搜尋引擎用的網站地圖與規則（照舊站保留） |
 | `tools/mirror.py` | 備份程式，舊站有更新時可重跑：`python3 tools/mirror.py` |
 | `tools/relativize.py` | 把站內路徑改成相對路徑，讓網站放在子資料夾（如 GitHub Pages）也能運作。重跑 mirror.py 之後一定要接著跑 |
-| `.github/workflows/pages.yml` | 自動發布到 GitHub Pages 的設定 |
 | `tools/mirror-report.txt` | 下載不到的檔案清單（都是舊站本身就不存在的檔案，外觀不受影響） |
 
 ## GitHub Pages 網址
 
 https://zealchou.github.io/GoldJoy/
 
-第一次要手動開啟：repo 的 **Settings → Pages → Build and deployment → Source** 選 **GitHub Actions**，
-之後每次推送新內容就會自動更新網站。
+第一次要手動開啟：repo 的 **Settings → Pages → Build and deployment**
+- Source 選 **Deploy from a branch**
+- Branch 選 **claude/amazing-cray-5aqx4h**，資料夾選 **/docs**，按 Save
+
+之後每次推送新內容，網站就會自動更新。（`docs/.nojekyll` 這個空檔案是告訴 GitHub 不要用 Jekyll 加工網頁，原封不動發布。）
 
 ## 更新備份的步驟
 
@@ -37,7 +39,7 @@ python3 tools/relativize.py  # 轉成相對路徑
 ## 在自己電腦預覽
 
 ```bash
-cd site
+cd docs
 python3 -m http.server 8000
 ```
 

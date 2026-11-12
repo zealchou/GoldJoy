@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-把 site/ 裡所有「/ 開頭的站內路徑」改成「相對路徑」。
+把 docs/ 裡所有「/ 開頭的站內路徑」改成「相對路徑」。
 
 為什麼：GitHub Pages 的網址是 https://<帳號>.github.io/<repo名>/，多了一層子資料夾，
 /about 這種根目錄路徑會指到錯的地方。改成相對路徑（例如 ../about/）後，
@@ -13,7 +13,7 @@ import os
 import posixpath
 import re
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site"))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs"))
 URL_ATTRS = {"href", "src", "data-src", "data-image", "data-imagemobile", "data-bg", "poster",
              "data-background", "data-original", "data-lazy", "action", "data-href"}
 
@@ -30,7 +30,7 @@ FILES = all_paths()
 
 
 def rel(target, from_dir):
-    """target 是像 /about?x#y 的根目錄路徑；from_dir 是目前檔案所在的資料夾（相對 site/）"""
+    """target 是像 /about?x#y 的根目錄路徑；from_dir 是目前檔案所在的資料夾（相對 docs/）"""
     from urllib.parse import unquote
     path = re.match(r"[^?#]*", target).group(0)
     rest = target[len(path):]

@@ -23,7 +23,7 @@ from collections import deque
 
 SITE = "https://goldjoy.com.tw"
 HOSTS = {"goldjoy.com.tw", "www.goldjoy.com.tw"}
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs")
 OUT = os.path.abspath(OUT)
 # 想把外部 CDN 的 CSS/JS 也抓回本地時，把網域加進這裡（會存到 /vendor/）。
 # 目前留空：Bootstrap、jQuery、Font Awesome、Google Fonts 維持舊站原本的 CDN 連結。
