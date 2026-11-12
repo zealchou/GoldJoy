@@ -35,6 +35,7 @@ ASSET_EXT = re.compile(
 )
 
 pages_done = set()
+EXTRA_PREFIXES = set()  # 舊站 bug 產生的額外頁面（不再往下延伸）
 assets_done = {}  # url -> local path or None
 failed = []
 
@@ -233,6 +234,16 @@ def process_html(text, page_url, page_queue):
         for slug in re.findall(r'<option value="([^"]+)"', sel.group(0)):
             if slug != "0":
                 page_queue.append(SITE + m.group(1) + slug)
+
+    # 「閱讀更多」按鈕用相對路徑連到 permalink。在分類頁上，舊站會把它解讀成
+    # /xxx/category/xxx/文章 這種網址（舊站的 bug），伺服器會回傳一個「最新資訊」頁。
+    # 為了點起來跟舊站一樣，這些頁面也一起抓（只抓一層，避免無限延伸）。
+    if not page_url.startswith(tuple(EXTRA_PREFIXES)):
+        for pl in re.findall(r'"permalink":"([^"]+)"', text):
+            target = urllib.parse.urljoin(page_url, pl)
+            if target != SITE + "/" + pl:
+                EXTRA_PREFIXES.add(target)
+                page_queue.append(target)
 
     text = STYLE_BLOCK.sub(
         lambda m: m.group(1) + process_css(m.group(2), page_url) + m.group(3), text
