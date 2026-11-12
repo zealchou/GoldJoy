@@ -221,6 +221,19 @@ def process_html(text, page_url, page_queue):
         esc = new.replace("&", "&amp;").replace(q, "&quot;" if q == '"' else "&#39;")
         return f"{lead}{name}={q}{esc}{q}"
 
+    # JS 裡寫死的圖片路徑（例如文章列表的 "image":"/uploads/..."）也要下載
+    for raw in re.findall(r"""["'](\\?/uploads/[^"']+)["']""", text):
+        u = norm(raw.replace("\\/", "/"), page_url)
+        if u:
+            get_asset(u)
+    # 部落格「分類篩選」下拉選單：JS 會跳到 /xxx/category/<分類代碼>，這些頁面不在 sitemap 裡
+    m = re.search(r"""["'](/[^"']+/category/)["']\s*\+""", text)
+    sel = re.search(r'<select[^>]*id="selectcategory".*?</select>', text, re.S)
+    if m and sel:
+        for slug in re.findall(r'<option value="([^"]+)"', sel.group(0)):
+            if slug != "0":
+                page_queue.append(SITE + m.group(1) + slug)
+
     text = STYLE_BLOCK.sub(
         lambda m: m.group(1) + process_css(m.group(2), page_url) + m.group(3), text
     )
