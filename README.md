@@ -21,13 +21,18 @@
 
 ## GitHub Pages 網址
 
-https://zealchou.github.io/GoldJoy/
+**https://zealchou.github.io/GoldJoy/**
 
-第一次要手動開啟：repo 的 **Settings → Pages → Build and deployment**
-- Source 選 **Deploy from a branch**
-- Branch 選 **claude/amazing-cray-5aqx4h**，資料夾選 **/docs**，按 Save
+發布方式：GitHub Pages 讀的是 `gh-pages` 分支，這個分支裡只放 `docs/` 資料夾的內容。
+`docs/` 有更新時，用下面的指令同步到 `gh-pages`，1～2 分鐘後網站就會更新：
 
-之後每次推送新內容，網站就會自動更新。（`docs/.nojekyll` 這個空檔案是告訴 GitHub 不要用 Jekyll 加工網頁，原封不動發布。）
+```bash
+git subtree split --prefix docs -b gh-pages-new
+git push -f origin gh-pages-new:gh-pages
+git branch -D gh-pages-new
+```
+
+（`docs/.nojekyll` 這個空檔案是告訴 GitHub 不要用 Jekyll 加工網頁，原封不動發布。）
 
 ## 更新備份的步驟
 
