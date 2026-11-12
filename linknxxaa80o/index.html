@@ -1219,7 +1219,7 @@ let dropdown = document.querySelectorAll('.nav-item.dropdown.show');
             text.innerHTML = "閱讀更多<i class='las la-angle-right'></i>";
             var bottom_btn = createDiv("bottom_btn");
             var permalink = document.createElement("a");
-            permalink.href = _permaLink;
+            permalink.href = "../" + _permaLink;
             //permalink.style.color = navBG;
             if (_layout == "Grid") {
                 if (_perView == 2 || _perView == 6) {
