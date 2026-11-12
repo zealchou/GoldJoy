@@ -114,6 +114,9 @@ def fix_html(text, from_dir):
         nonlocal text_js
         text_js = m.group(2)
         body = re.sub(r"""(["'])(/(?!/)[^"'\n]*)\1""", fix_js_str, text_js)
+        # 「閱讀更多」按鈕：舊站寫 permalink.href = _permaLink（相對路徑，例如 communication/2-52）。
+        # 舊站網址結尾沒有 /，新站每頁是資料夾（結尾有 /），所以要補 ../ 才會指到同一個地方。
+        body = re.sub(r"(\.href\s*=\s*)(_permaLink\s*;)", r'\1"../" + \2', body)
         return m.group(1) + body + m.group(3)
 
     text_js = ""
