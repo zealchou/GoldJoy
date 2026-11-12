@@ -1,0 +1,15 @@
+# 下載失敗或略過的網址
+404	https://goldjoy.com.tw/images/cta.png
+404	https://goldjoy.com.tw/assets/css/images/fancybox/fancybox_sprite.png
+404	https://goldjoy.com.tw/assets/css/images/fancybox/fancybox_loading.gif
+404	https://goldjoy.com.tw/assets/css/images/fancybox/blank.gif
+404	https://goldjoy.com.tw/assets/css/images/fancybox/fancybox_overlay.png
+404	https://goldjoy.com.tw/assets/css/images/fancybox/fancybox_sprite@2x.png
+404	https://goldjoy.com.tw/assets/css/images/fancybox/fancybox_loading@2x.gif
+404	https://goldjoy.com.tw/assets/css/images/ajax-loader.gif
+404	https://goldjoy.com.tw/assets/css/images/select-icon.png
+404	https://goldjoy.com.tw/assets/css/images/page-title1.png
+404	https://goldjoy.com.tw/assets/css/images/cta.png
+404	https://goldjoy.com.tw/assets/css/images/about-video.jpg
+404	https://goldjoy.com.tw/assets/css/images/cta-s2.png
+404	https://goldjoy.com.tw/assets/css/images/blog/quote.png
